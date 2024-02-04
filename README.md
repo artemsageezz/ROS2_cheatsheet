@@ -59,3 +59,21 @@
 * `ros2 param dump <node_name>` -  view all of a node’s current parameter values.
 * `ros2 param load <node_name> <parameter_file>` -  load parameters from a file to a currently running node.
 * `ros2 run <package_name> <executable_name> --ros-args --params-file <file_name>` - start the same node using your saved parameter values.
+
+## Understanding actions
+
+>Actions are one of the communication types in ROS 2 and are intended for long running tasks. They consist of three parts: a goal, feedback, and a result.\
+Actions are built on topics and services. Their functionality is similar to services, except actions can be canceled. They also provide steady feedback, as opposed to services which return a single response.\
+Actions use a client-server model, similar to the publisher-subscriber model (described in the topics tutorial). An “action client” node sends a goal to an “action server” node that acknowledges the goal and returns a stream of feedback and a result.
+
+<div align="center">
+  <img src="https://docs.ros.org/en/humble/_images/Action-SingleActionClient.gif" width="600" height="300"/>
+</div>
+
+* `ros2 node info <node_name>` -  return a list of node’s subscribers, publishers, services, action servers and action clients.
+* `ros2 action list` - to identify all the actions in the ROS graph. `-t` - print the type.
+* `ros2 action info <action_name>` - introspect the action
+* `ros2 interface show <action_type>` - structure of the action type.
+* `ros2 action send_goal <action_name> <action_type> <values>` - send an action goal from the command line (yaml format). `--feedback` option let see the feedback.
+
+> A robot system would likely use actions for navigation. An action goal could tell a robot to travel to a position. While the robot navigates to the position, it can send updates along the way (i.e. feedback), and then a final result message once it’s reached its destination.
