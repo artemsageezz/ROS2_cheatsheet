@@ -33,3 +33,18 @@
 * `ros2 interface show <msg type>` - what structure of data the message expects
 * `ros2 topic pub <topic_name> <msg_type> '<args>'` -  publish data to a topic directly from the command line (`'<args>'` - YAML format). `--once` -  is an optional argument meaning “publish one message then exit”. `--rate 1` - option which tells to publish the command in a steady stream at 1 Hz.
 * `ros2 topic hz <topic_name>` - the rate at which data is published using.
+
+## Understanding Services
+
+<div align="center">
+  <img src="https://docs.ros.org/en/humble/_images/Service-MultipleServiceClient.gif" width="600" height="300"/>
+</div>
+
+>Nodes can communicate using services in ROS 2. Unlike a topic - a one way communication pattern where a node publishes information that can be consumed by one or more subscribers - a service is a request/response pattern where a client makes a request to a node providing the service and the service processes the request and generates a response.\
+>You generally don’t want to use a service for continuous calls; topics or even actions would be better suited.
+
+* `ros2 service list` - will return a list of all the services currently active in the system. Option `-t` - to see the types of all active services.
+* `ros2 service type <service_name>` -  find out the type of a service.
+* `ros2 service find <type_name>`- to find all the services of a specific type
+* `ros2 interface show <type_name>` - to know the structure of the input arguments.
+* `ros2 service call <service_name> <service_type> <arguments>` - call a service (`<arguments>` - YAML format)
