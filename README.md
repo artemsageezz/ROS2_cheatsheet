@@ -20,7 +20,9 @@
 
 ## Understanding topics
 
-![Topic sheme](https://docs.ros.org/en/humble/_images/Topic-MultiplePublisherandMultipleSubscriber.gif)
+<div align="center">
+  <img src="https://docs.ros.org/en/humble/_images/Topic-MultiplePublisherandMultipleSubscriber.gif" width="600" height="300"/>
+</div>
 
 >Nodes publish information over topics, which allows any number of other nodes to subscribe to and access that information. In this tutorial you examined the connections between several nodes over topics using rqt_graph and command line tools.
 
