@@ -48,3 +48,14 @@
 * `ros2 service find <type_name>`- to find all the services of a specific type
 * `ros2 interface show <type_name>` - to know the structure of the input arguments.
 * `ros2 service call <service_name> <service_type> <arguments>` - call a service (`<arguments>` - YAML format)
+
+## Understanding parameters
+
+> Nodes have parameters to define their default configuration values. You can `get` and `set` parameter values from the command line. You can also save the parameter settings to a file to reload them in a future session.
+
+* `ros2 param list` - will return the nodenamespaces, followed by each node's parameter.
+* `ros2 param get <node_name> <parameter_name>` - display the type and current value of a parameter.
+* `ros2 param set <node_name> <parameter_name> <value>` - change a parameter’s value at runtime.
+* `ros2 param dump <node_name>` -  view all of a node’s current parameter values.
+* `ros2 param load <node_name> <parameter_file>` -  load parameters from a file to a currently running node.
+* `ros2 run <package_name> <executable_name> --ros-args --params-file <file_name>` - start the same node using your saved parameter values.
