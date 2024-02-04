@@ -1,5 +1,5 @@
 # Beginner: CLI Tools
-## Turtlesim, ros2, rqt
+## Turtlesim, ros2, rqt [docs](https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Introducing-Turtlesim/Introducing-Turtlesim.html)
 
 > Using turtlesim and rqt is a great way to learn the core concepts of ROS 2.
 * `ros2 pkg executables turtlesim` - check that the package is installed
@@ -8,7 +8,7 @@
 * `rqt` - run rqt
 * `ros2 run turtlesim turtle_teleop_key --ros-args --remap turtle1/cmd_vel:=turtle2/cmd_vel` - change behavior by remapping (way to control turtle2)
 
-## Understanding nodes
+## Understanding nodes [docs](https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Nodes/Understanding-ROS2-Nodes.html)
 
 > A node is a fundamental ROS 2 element that serves a single, modular purpose in a robotics system.\
 >In this tutorial, you utilized nodes created in the `turtlesim` package by running the executables `turtlesim_node` and `turtle_teleop_key`.
@@ -18,7 +18,8 @@
 * `ros2 run turtlesim turtlesim_node --ros-args --remap __node:=my_turtle` - reassign the name of our `/turtlesim` node. 
 * `ros2 node info <node_name>` - more information about nodes.
 
-## Understanding topics
+## Understanding topics [docs](https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Topics/Understanding-ROS2-Topics.html)
+
 
 <div align="center">
   <img src="https://docs.ros.org/en/humble/_images/Topic-MultiplePublisherandMultipleSubscriber.gif" width="600" height="300"/>
@@ -34,7 +35,7 @@
 * `ros2 topic pub <topic_name> <msg_type> '<args>'` -  publish data to a topic directly from the command line (`'<args>'` - YAML format). `--once` -  is an optional argument meaning “publish one message then exit”. `--rate 1` - option which tells to publish the command in a steady stream at 1 Hz.
 * `ros2 topic hz <topic_name>` - the rate at which data is published using.
 
-## Understanding Services
+## Understanding Services [docs](https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Services/Understanding-ROS2-Services.html)
 
 <div align="center">
   <img src="https://docs.ros.org/en/humble/_images/Service-MultipleServiceClient.gif" width="600" height="300"/>
@@ -49,7 +50,7 @@
 * `ros2 interface show <type_name>` - to know the structure of the input arguments.
 * `ros2 service call <service_name> <service_type> <arguments>` - call a service (`<arguments>` - YAML format)
 
-## Understanding parameters
+## Understanding parameters [docs](https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Parameters/Understanding-ROS2-Parameters.html)
 
 > Nodes have parameters to define their default configuration values. You can `get` and `set` parameter values from the command line. You can also save the parameter settings to a file to reload them in a future session.
 
@@ -60,7 +61,7 @@
 * `ros2 param load <node_name> <parameter_file>` -  load parameters from a file to a currently running node.
 * `ros2 run <package_name> <executable_name> --ros-args --params-file <file_name>` - start the same node using your saved parameter values.
 
-## Understanding actions
+## Understanding actions [docs](https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Actions/Understanding-ROS2-Actions.html)
 
 >Actions are one of the communication types in ROS 2 and are intended for long running tasks. They consist of three parts: a goal, feedback, and a result.\
 Actions are built on topics and services. Their functionality is similar to services, except actions can be canceled. They also provide steady feedback, as opposed to services which return a single response.\
