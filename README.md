@@ -78,3 +78,22 @@ Actions use a client-server model, similar to the publisher-subscriber model (de
 * `ros2 action send_goal <action_name> <action_type> <values>` - send an action goal from the command line (yaml format). `--feedback` option let see the feedback.
 
 > A robot system would likely use actions for navigation. An action goal could tell a robot to travel to a position. While the robot navigates to the position, it can send updates along the way (i.e. feedback), and then a final result message once it’s reached its destination.
+
+
+## Using `rqt_console` to view logs [docs](https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Using-Rqt-Console/Using-Rqt-Console.html)
+
+>`rqt_console` is a GUI tool used to introspect log messages in ROS 2. Typically, log messages show up in your terminal. With `rqt_console`, you can collect those messages over time, view them closely and in a more organized manner, filter them, save them and even reload the saved files to introspect at a different time.\
+>Nodes use logs to output messages concerning events and status in a variety of ways. Their content is usually informational, for the sake of the user.
+
+* `ros2 run rqt_console rqt_console` - start `rqt_console`.
+* Logger levels:
+  *  `Fatal` - messages indicate the system is going to terminate to try to protect itself from detriment.
+
+  *  `Error` messages indicate significant issues that won’t necessarily damage the system, but are preventing it from functioning properly.
+
+  *  `Warn` messages indicate unexpected activity or non-ideal results that might represent a deeper issue, but don’t harm functionality outright.
+
+  *  `Info` messages indicate event and status updates that serve as a visual verification that the system is running as expected.
+
+  *  `Debug` messages detail the entire step-by-step process of the system execution.
+* `ros2 run <package> <node_name> --ros-args --log-level <Log_Level>` - set the default logger level.
