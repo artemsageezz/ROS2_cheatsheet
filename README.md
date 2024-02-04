@@ -104,3 +104,13 @@ Actions use a client-server model, similar to the publisher-subscriber model (de
 >Launch files allow you to start up and configure a number of executables containing ROS 2 nodes simultaneously.
 
 * `ros2 launch turtlesim multisim.launch.py` - run the following launch file.
+
+## Recording and playing data [docs](https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Recording-And-Playing-Back-Data/Recording-And-Playing-Back-Data.html)
+
+>`ros2 bag` is a command line tool for recording data published on topics in your system. It accumulates the data passed on any number of topics and saves it in a database. You can then replay the data to reproduce the results of your tests and experiments. Recording topics is also a great way to share your work and allow others to recreate it.
+
+* `ros2 topic echo <topic_name>` - see the data that `<topic_name>` is publishing.
+* `ros2 bag record <topic_name>` - record the data published to a topic.
+* `ros2 bag record -o subset <topic_name_1> <topic_name_2>` -  record more than one topic at a time. The `-o` option allows you to choose a unique name for your bag file. The following string, in this case `subset`, is the file name. `-a` records all the topics on your system.
+* `ros2 bag info <bag_file_name>` -  see details about your recording.
+* `ros2 bag play subset` - replaying the bag file.
