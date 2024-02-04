@@ -97,3 +97,10 @@ Actions use a client-server model, similar to the publisher-subscriber model (de
 
   *  `Debug` messages detail the entire step-by-step process of the system execution.
 * `ros2 run <package> <node_name> --ros-args --log-level <Log_Level>` - set the default logger level.
+
+## Launching nodes [docs](https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Launching-Multiple-Nodes/Launching-Multiple-Nodes.html)
+
+> In most of the introductory tutorials, you have been opening new terminals for every new node you run. As you create more complex systems with more and more nodes running simultaneously, opening terminals and reentering configuration details becomes tedious.\
+>Launch files allow you to start up and configure a number of executables containing ROS 2 nodes simultaneously.
+
+* `ros2 launch turtlesim multisim.launch.py` - run the following launch file.
