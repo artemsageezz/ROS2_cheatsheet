@@ -1,5 +1,5 @@
 # Cheatsheet for ROS2
-## Beginner: CLI Tools [docs](https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools.html)
+## [Beginner: CLI Tools](https://github.com/sage-artem/ROS2_cheatsheet/blob/master/Beginner_CLI_Tools.md)
 * Turtlesim, ros2, rqt
 * Understanding nodes
 * Understanding topics
