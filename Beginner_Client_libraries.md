@@ -53,3 +53,70 @@ On line 52 you will see the function `setWindowTitle("TurtleSim");`. Change the 
 ...
 
 You can see that modifications in the overlay did not actually affect anything in the underlay.
+
+## Creating a package [docs](https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html)
+
+> A package is an organizational unit for your ROS 2 code. If you want to be able to install your code or share it with others, then you’ll need it organized in a package. With packages, you can release your ROS 2 work and allow others to build and use it easily.\
+>Package creation in ROS 2 uses ament as its build system and colcon as its build tool. You can create a package using either CMake or Python, which are officially supported, though other build types do exist.
+
+What makes up a ROS 2 package?
+* `package.xml` file containing meta information about the package
+
+* `resource/<package_name>` marker file for the package
+
+* `setup.cfg` is required when a package has executables, so `ros2 run` can find them
+
+* `setup.py` containing instructions for how to install the package
+
+* `<package_name>` - a directory with the same name as your package, used by ROS 2 tools to find your package, contains `__init__.py `
+
+```
+my_package/
+      package.xml
+      resource/my_package
+      setup.cfg
+      setup.py
+      my_package/
+```
+
+A single workspace can contain as many packages as you want, each in their own folder. Best practice is to have a `src` folder within your workspace, and to create your packages in there.
+
+```
+workspace_folder/
+    src/
+      cpp_package_1/
+          CMakeLists.txt
+          include/cpp_package_1/
+          package.xml
+          src/
+
+      py_package_1/
+          package.xml
+          resource/py_package_1
+          setup.cfg
+          setup.py
+          py_package_1/
+      ...
+      cpp_package_n/
+          CMakeLists.txt
+          include/cpp_package_n/
+          package.xml
+          src/
+```
+
+* `ros2 pkg create --build-type ament_python --license Apache-2.0 <package_name>` (python) - creating a new package.\
+exampe: `ros2 pkg create --build-type ament_python --license Apache-2.0 --node-name my_node my_package`
+
+* `colcon build` -  build your packages. To build only the `my_package` package `colcon build --packages-select my_package`.
+
+* `ros2 run my_package my_node` - to run the executable you created using the `--node-name` argument during package creation.
+
+Inside `ros2_ws/src/my_package`, you will see the files and folders that ros2 pkg create automatically generated:
+`my_package  package.xml  resource  setup.cfg  setup.py  test`\
+`my_node.py` is inside the my_package directory.
+
+In package.xml fields **description** and **license** declaration are not automatically set, but are required if you ever want to release your package. The **maintainer** field may also need to be filled in.
+
+Below the license tag, you will see some tag names ending with `_depend`. This is where your `package.xml` would list its dependencies on other packages, for colcon to search for.
+
+The `setup.py` file contains the same **description**, **maintainer** and **license** fields as `package.xml`, so you need to set those as well. They need to match exactly in both files. The version and name (`package_name`) also need to match exactly, and should be automatically populated in both files.
