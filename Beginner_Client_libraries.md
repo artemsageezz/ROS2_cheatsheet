@@ -2,7 +2,8 @@
 
 [Using `colcon` to build packages](#using-colcon-to-build-packages-docs)\
 [Creating a workspace](#creating-a-workspace-docs)\
-[Creating a package](#creating-a-package-docs)
+[Creating a package](#creating-a-package-docs)\
+[Writing a simple publisher and subscriber (Python)](#writing-a-simple-publisher-and-subscriber-python-docs)
 
 ## Using `colcon` to build packages [docs](https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Colcon-Tutorial.html)
 
@@ -124,3 +125,60 @@ In package.xml fields **description** and **license** declaration are not automa
 Below the license tag, you will see some tag names ending with `_depend`. This is where your `package.xml` would list its dependencies on other packages, for colcon to search for.
 
 The `setup.py` file contains the same **description**, **maintainer** and **license** fields as `package.xml`, so you need to set those as well. They need to match exactly in both files. The version and name (`package_name`) also need to match exactly, and should be automatically populated in both files.
+
+## Writing a simple publisher and subscriber (Python) [docs](https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html)
+
+>The example used here is a simple “talker” and “listener” system; one node publishes data and the other subscribes to the topic so it can receive that data.
+
+* `ros2 pkg create --build-type ament_python --license Apache-2.0 py_pubsub` - package creation command (in `ros2_ws/src` directory).
+
+* `wget https://raw.githubusercontent.com/ros2/examples/humble/rclpy/topics/minimal_publisher/examples_rclpy_minimal_publisher/publisher_member_function.py` - Download the example talker code (in `ros2_ws/src/py_pubsub/py_pubsub`).
+
+In `package.xml` fill in the `<description>`, `<maintainer>` and `<license>` tags and add the following dependencies corresponding to your node’s import statements:
+
+```
+<exec_depend>rclpy</exec_depend>
+<exec_depend>std_msgs</exec_depend>
+```
+
+In `setup.py` match the `maintainer`, `maintainer_email`, `description` and `license` fields to your `package.xml` and add the following line within the `console_scripts` brackets of the `entry_points` field:
+
+```
+entry_points={
+        'console_scripts': [
+                'talker = py_pubsub.publisher_member_function:main',
+        ],
+},
+```
+The contents of the `setup.cfg` file should be correctly populated automatically, like so:
+
+```
+[develop]
+script_dir=$base/lib/py_pubsub
+[install]
+install_scripts=$base/lib/py_pubsub
+```
+
+* `wget https://raw.githubusercontent.com/ros2/examples/humble/rclpy/topics/minimal_subscriber/examples_rclpy_minimal_subscriber/subscriber_member_function.py` - download subscriber node (in `ros2_ws/src/py_pubsub/py_pubsub` directory)
+
+In `setup.py` add the entry point for the subscriber node below the publisher’s entry point. The entry_points field should now look like this:
+
+```
+entry_points={
+        'console_scripts': [
+                'talker = py_pubsub.publisher_member_function:main',
+                'listener = py_pubsub.subscriber_member_function:main',
+        ],
+},
+```
+
+* `rosdep install -i --from-path src --rosdistro humble -y` - in the root of your workspace (`ros2_ws`)to check for missing dependencies before building.
+
+* `colcon build --packages-select py_pubsub` - in the root of your workspace, `ros2_ws`, build your new package.
+
+* `source install/setup.bash` - in **NEW** terminal navigate to `ros2_ws` source the setup files.
+
+* `ros2 run py_pubsub talker` - run the talker node.
+
+* `ros2 run py_pubsub listener` - run the listener node.
+
